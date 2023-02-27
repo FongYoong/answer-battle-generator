@@ -4,8 +4,10 @@ import path from 'path'
 import open from 'open'
 import getDownloadsFolder from 'downloads-folder'
 import { generate } from './generate';
-import { web_assets } from './utils';
+import { web_assets, node_path, npm_path } from './utils';
 import mime from 'mime-types'
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
 
 const downloadsFolder = getDownloadsFolder();
 const defaultOutputPath = path.join(downloadsFolder, 'index.html')
@@ -21,6 +23,13 @@ function getExtensions(mimeType) {
 }
 
 export function createListeners() {
+
+    ipcMain.handle('get_node', async (_event) => {
+        const nodeResult = await exec(`${node_path} -v`)
+        const npmResult = await exec(`${npm_path} -v`)
+        return `node stdout: ${nodeResult.stdout}\nnode stderr: ${nodeResult.stderr}\nnpm stdout: ${npmResult.stdout}\nnpm stderr: ${npmResult.stderr}`
+    });
+
 
     ipcMain.handle('open_file', (_event, fileType, defaultPath) => {
         let filter;

@@ -104,8 +104,10 @@ function App() {
   }, [roundsText])
 
   // useEffect(() => {
-  //   window.api.onOpenAboutPage((_event) => {
-  //     alert('about')
+  //   window.api.getNode().then((result) => {
+  //     alert(result)
+  //   }).catch((e) => {
+  //     alert(e)
   //   })
   // }, [])
 

@@ -13,3 +13,7 @@ export const general_config_path = path.join(config_dir, "general.config.json")
 export const assets_config_path = path.join(config_dir, "assets.config.json")
 export const rounds_config_path = path.join(config_dir, "rounds.config.json")
 export const output_dist_path = path.join(web_project, "dist", "index.html")
+
+export const node_dir = path.join(resources, 'node');
+export const node_path = path.join(node_dir, 'node.exe');
+export const npm_path = path.join(node_dir, 'npm');

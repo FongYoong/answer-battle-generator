@@ -3,7 +3,9 @@ import path from 'path'
 import fs from 'fs'
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
-import { web_project, config_dir, default_config_dir, general_config_path, assets_config_path, rounds_config_path, output_dist_path } from './utils'
+import { web_project, config_dir, default_config_dir, general_config_path, assets_config_path, rounds_config_path, output_dist_path,
+    node_dir, npm_path,
+} from './utils'
 
 function copyFiles(srcDir, destDir) {
     const srcFiles = fs.readdirSync(srcDir)
@@ -54,7 +56,14 @@ export const generate = async (data) => {
     const originalDir = process.cwd()
     process.chdir(web_project)
 
-    const { stdout, stderr } = await exec('npm run build');
+    // process.env['PATH'] = `${process.env['PATH']};${node_dir}` 
+    process.env['PATH'] = `${node_dir}` 
+    console.log(process.env['PATH'])
+
+    const { stdout, stderr } = await exec(
+        `echo %PATH% && node -v && ${npm_path} run build`,
+        // `echo %PATH% && node -v`,
+    );
     console.log('stdout:', stdout);
     console.error('stderr:', stderr);
 

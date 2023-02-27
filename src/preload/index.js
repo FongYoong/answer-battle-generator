@@ -3,6 +3,7 @@ import { electronAPI } from '@electron-toolkit/preload'
 
 // Custom APIs for renderer
 const api = {
+  getNode: () => ipcRenderer.invoke('get_node'),
 
   openFile: (fileType, defaultPath) => ipcRenderer.invoke('open_file', fileType, defaultPath),
   getDefaultOutputPath: () => ipcRenderer.invoke('get_default_output_path'),
