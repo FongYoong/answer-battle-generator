@@ -1,6 +1,6 @@
 {
   "name": "answer-battle-generator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Desktop application to generate Family Feud games",
   "main": "./out/main/index.js",
   "author": "fong.yoong",
